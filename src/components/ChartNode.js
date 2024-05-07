@@ -30,7 +30,7 @@ const ChartNode = ({
 }) => {
   const node = useRef();
 
-  const [isChildrenCollapsed, setIsChildrenCollapsed] = useState(false);
+  const [isChildrenCollapsed, setIsChildrenCollapsed] = useState(!!datasource?.collapsed);
   const [topEdgeExpanded, setTopEdgeExpanded] = useState();
   const [rightEdgeExpanded, setRightEdgeExpanded] = useState();
   const [bottomEdgeExpanded, setBottomEdgeExpanded] = useState();
@@ -46,11 +46,7 @@ const ChartNode = ({
   ]
     .filter(item => item)
     .join(" ");
-  useEffect(() => {
-    if (datasource?.collapsed) {
-      setIsChildrenCollapsed(true);
-    }
-  }, [datasource])
+
   useEffect(() => {
     const subs1 = dragNodeService.getDragInfo().subscribe(draggedInfo => {
       if (draggedInfo) {
